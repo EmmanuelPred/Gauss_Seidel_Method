@@ -6,7 +6,7 @@ Created on Wed Mar 11 14:55:00 2020
 @author: emmanuel
 """
 from tkinter import *
-from tkinter import messagebox as MessageBox    #En esta parte se importan las respectivas bibliotecas y librerias que se utilizarán en el código
+from tkinter import messagebox as MessageBox    
 import sys
 import os
 import math
@@ -25,19 +25,19 @@ class Falsapos:
     
  def __init__(self):
 
-        self.window = Tk() #se crea una ventana en tkinter.
+        self.window = Tk() 
         self.window.title("Gauss-Siedel")
         self.window.geometry("1300x640")
         self.window.resizable(0,0)
         
-        self.ecs=IntVar(value=0) #se crean los atributos y datos de entrada que se ocuparán posteriormente.
+        self.ecs=IntVar(value=0) 
         self._entry = {}
         self._entry2 = {}
         self._entry3 = {}
         self.it=IntVar(value=0)
         self.err=DoubleVar(value=0.0)
         
-        self.lbl1=Label(self.window,text='Indique el número de ecuaciones: ') #etiquetas que se muestran en la ventana del programa.
+        self.lbl1=Label(self.window,text='Indique el número de ecuaciones: ') 
         self.lbl1.place(x=10, y=20)
         self.lbl3=Label(self.window,text='Indique el número de iteraciones: ')
         self.lbl3.place(x=10, y=60)
@@ -45,7 +45,7 @@ class Falsapos:
         self.lbl6.place(x=10, y=100)
 
         
-        self.t1=Entry(self.window,textvariable=self.ecs)    #estas son las casillas en las cuales se ingresarán datos como el número de ecuaciones, iteraciones, etc. dentro de la ventana del programa.
+        self.t1=Entry(self.window,textvariable=self.ecs)    
         self.t1.place(x=240, y=20,width='50')
         self.t1.delete(0,'end')
         self.t1.focus_set()
@@ -58,10 +58,10 @@ class Falsapos:
         
 
         
-        self.textC=scrolledtext.ScrolledText(self.window,width=55,height=30)    #Este es un bloque de texto en el cual se desplegarán los resultados del método de Gauss-Siedel dentro de la ventana principal.
+        self.textC=scrolledtext.ScrolledText(self.window,width=55,height=30)    
         self.textC.place(x=860, y=80)
         
-        self.b1=Button(self.window,text='Ingresar coeficientes',command=self.CrearMa)   #Estos son los botones los cuales realizaran las acciones correspondientes a la creación de matrices y el procedimiento de Gauss-Siedel.
+        self.b1=Button(self.window,text='Ingresar coeficientes',command=self.CrearMa)   
         self.b1.place(x=10, y=150)
         self.b4=Button(self.window,text='Calcular',command=self.Show)
         self.b4.place(x=1000, y=20)
@@ -72,25 +72,25 @@ class Falsapos:
 
         self.window.mainloop() 
 
- def reset(self):    #Este es el método que resetea la ventana principal.
+ def reset(self):   
              python = sys.executable
              os.execl(python, python, * sys.argv)
              
- def MecValEc(self): # Mecanismo de validación (método) para el número de ecuaciones.
+ def MecValEc(self): 
      ecs1=(self.t1.get())
      try:
          entero = int(ecs1)
      except ValueError:
          MessageBox.showwarning("Error","El número de ecuaciones debe ser entero, por favor ingrese un valor entero positivo.")  
   
- def MecValEr(self):    # Mecanismo de validación (método) para el valor del error. 
+ def MecValEr(self):    
      error1=(self.t4.get())
      try:
              floatante = float(error1)
      except ValueError:
                  MessageBox.showerror("Error","El valor del error debe ser decimal, por favor ingrese un valor dentro del rango.") 
                  
- def MecValIt(self):  # Mecanismo de validación (método) para el número de iteraciones. 
+ def MecValIt(self):
      it1=(self.t2.get()) 
      try:
                  entero = int(it1)
@@ -98,10 +98,10 @@ class Falsapos:
                  MessageBox.showerror("Error","El número de iteraciones debe ser entero, por favor ingrese un valor entero positivo.")  
 
         
- def CrearMa(self):  #Este es el método para crear la matriz de coeficientes en la interfaz de la ventana principal.
+ def CrearMa(self): 
     self.MecValEc()  
     if not self.t1.get():
-        MessageBox.showerror("Error","Ingrese el número de ecuaciones")  #Estos son mensajes de verificación (mecanismos de verificación) para verificar que los números que ingresa el usuario esten en un rango válido.
+        MessageBox.showerror("Error","Ingrese el número de ecuaciones")  
         self.t1.delete(0,'end')
     self.MecValIt()
     if not self.t2.get():
@@ -130,7 +130,7 @@ class Falsapos:
                         MessageBox.showerror("Error","Los valores válidos para el error van desde 0.01 a 0.00001")
                         self.t4.delete(0,'end')
                     else:
-                        self.lbl4=Label(self.window,text='A')   #Esta es la parte donde se comienza a crear la matriz en la ventana principal.
+                        self.lbl4=Label(self.window,text='A')  
                         self.lbl4.place(x=10, y=180)
                         self.lbl5=Label(self.window,text='B')
                         self.lbl5.place(x=(ecs*58)-(ecs*1.3),y=180)
@@ -149,7 +149,7 @@ class Falsapos:
                             self._entry2[index2] = self.e2
     
                 
- def CrearAp(self):  #Este es el método el cual crea un vector para ingresar la solución propuesta en la ventana principal.
+ def CrearAp(self): 
         self.MecValEc()
         if not self.t1.get():
             MessageBox.showerror("Error","Primero ingrese el número de ecuaciones")
@@ -190,7 +190,7 @@ class Falsapos:
                                 self._entry3[index3] = self.e3
      
 
- def GetDat(self):  #Este método recoje los datos ingresados en la matriz creada en la intefaz y crea una matriz (La famosa matriz de coeficientes A).  
+ def GetDat(self):  
 
         ecs=int(self.t1.get()) 
         result = []
@@ -202,7 +202,7 @@ class Falsapos:
             result.append(current_row)          
         return result
         
- def GetDat2(self):    #Este método recoje los datos ingresados de los resultados a los cuales se iguala cada una de las ecuaciones del sistema de ecuaciones y crea el vector B.
+ def GetDat2(self):   
 
         ecs=int(self.t1.get()) 
         result2 = []
@@ -211,7 +211,7 @@ class Falsapos:
                 result2.append(float(self._entry2[index2].get()))          
         return result2     
         
- def GetDat3(self):    #Este método recoje los datos ingresados en la solución propuesta y crea un vector x^{0}.
+ def GetDat3(self):    
 
         ecs=int(self.t1.get()) 
         result3 = []
@@ -221,7 +221,7 @@ class Falsapos:
         return result3   
         
     
- def GaussXSie(self,A, x, b, n): #Este método realiza el algoritmo del método de Gauss-Siedel, regresando un vector con la solución aproximada.
+ def GaussXSie(self,A, x, b, n): 
     error=float(self.t4.get())
     L = np.tril(A)
     U = A - L
@@ -250,7 +250,7 @@ class Falsapos:
     return x
 
         
- def Show(self):    #Este método muestra toda la información del algoritmo dentro del bloque de texto ubicado en la ventana principal.
+ def Show(self):    
     self.MecValEc()
     if not self.t1.get():
         MessageBox.showerror("Error","Primero ingrese el número de ecuaciones")
@@ -297,7 +297,7 @@ class Falsapos:
 
      
                 
-def main(): #Fin XD
+def main():
     objeto=Falsapos()
     return 0
 
