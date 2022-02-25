@@ -58,20 +58,7 @@ class Falsapos:
         
 
         
-        self.textC=scrolledtext.ScrolledText(self.window,width=55,height=30)    
-        self.textC.place(x=860, y=80)
         
-        self.b1=Button(self.window,text='Ingresar coeficientes',command=self.CrearMa)   
-        self.b1.place(x=10, y=150)
-        self.b4=Button(self.window,text='Calcular',command=self.Show)
-        self.b4.place(x=1000, y=20)
-        self.b2=Button(self.window,text='Ingresar solución propuesta',command=self.CrearAp)
-        self.b2.place(x=620, y=20)
-        self.b3=Button(self.window,text='Reiniciar todo',command=self.reset)
-        self.b3.place(x=1155, y=600)
-
-        self.window.mainloop() 
-
  def reset(self):   
              python = sys.executable
              os.execl(python, python, * sys.argv)
@@ -221,23 +208,7 @@ class Falsapos:
         return result3   
         
     
- def GaussXSie(self,A, x, b, n): 
-    error=float(self.t4.get())
-    L = np.tril(A)
-    U = A - L
-    for i in range(0,n):
-        xold=x
-        x = np.dot(np.linalg.inv(L), b - np.dot(U, x))
-        norma1=np.linalg.norm(x-xold)
-        norma2=np.linalg.norm(x)
-        errorCal=norma1/norma2
-        if errorCal>error:
-            self.textC.insert(INSERT,"Iteracón: "+str(i+1)+"\n")
-            xfinal1=[]
-            for j in range(len(x)):
-                xfinal1.append("{0:.5f}".format(float(x[j])))
-            self.textC.insert(INSERT,"aproximación: "+str(xfinal1)+"\n")
-            self.textC.insert(INSERT,"\n")
+ 
         else:
             if errorCal<error:
                 self.textC.insert(INSERT,"!!! Se llegó a una solución bajo el parámetro de error justo o antes de el número de iteraciones solicitadas !!!\n"+"\n")
